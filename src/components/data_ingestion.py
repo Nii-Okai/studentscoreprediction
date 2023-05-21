@@ -1,6 +1,8 @@
 import os
 import sys
 from src.exception import CustomException
+from src.components.data_transformation import DataTransformation
+from src.components.model_trainer import ModelTrainer
 from src.logger import logging
 import pandas as pd
 
@@ -49,3 +51,10 @@ class DataIngestion:
 if __name__ == "__main__":
     obj = DataIngestion()
     obj.initiate_data_ingestion()
+
+    trans = DataTransformation()
+    train_arr, test_arr, _ = trans.initiate_data_transformation("artifacts/train.csv", "artifacts/test.csv")
+
+    trans = ModelTrainer()
+    trans.initiate_model_trainer(train_arr, test_arr)
+    
